@@ -29,6 +29,25 @@ $ git fetch upstream</pre>
 
 Note that we used the public clone URL for upstream, so we can't push changes directly to it.  We probably don't have permission to do that anyway, which is why we're creating a fork in the first place.  If the upstream repo is private, you must use its private URL.
 
+Working with existing clones
+----------------------------
+
+If you've already cloned the upstream repo, and you'd like to switch your existing clone to point to your fork, you'll need to first set up the remote repositories.
+<pre class="terminal">$ git remote rename origin upstream
+$ git remote add origin git@github.com:billyanyteen/github-services.git</pre>
+
+Then, to make your new origin the default remote repo for push and pull commands, you'll need to edit the repository's config.
+<pre class="terminal">$ git config -e</pre>
+
+This will bring up a text editor with your git config. Find a section like this:
+<pre>[branch "master"]
+    remote = upstream
+    merge = refs/heads/master</pre>
+and change "upstream" to "origin", like so:
+<pre>[branch "master"]
+    remote = origin
+    merge = refs/heads/master</pre>
+
 Pushing your changes
 --------------------
 
